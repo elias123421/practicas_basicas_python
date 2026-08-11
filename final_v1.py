@@ -1,6 +1,6 @@
-productos = []
-precios = []
-cantidades = []
+productos = ["mango", "platano", "uva"]
+precios = [23, 34, 31]
+cantidades = [12, 23, 43]
 carrito_compras = []
 
 
@@ -8,7 +8,7 @@ def mostrar_inventario(lista_prod, lista_prec, lista_cant):
     if len(lista_prod) == 0:
         print("El inventario está vacío.")
     else:
-        print("\n--- INVENTARIO ACTUAL ---")
+        print("--- INVENTARIO ACTUAL ---")
         for i in range(len(lista_prod)):
             print(
                 f"{i + 1}. Producto: {lista_prod[i]}, Precio: ${lista_prec[i]}, Cantidad: {lista_cant[i]}")
@@ -59,8 +59,27 @@ if eleccion == "administrador":
             break
         else:
             print("Opcion no valida, por favor intente de nuevo")
-elif eleccion == "Cliente":
+elif eleccion == "cliente":
+    print("Bienvenido a la tienda, por el momento este es nuestro inventario actual:")
+    mostrar_inventario(productos, precios, cantidades)
+
     while True:
-        print("Bienvenido a la tienda, por el momento este es nuestro inventario actual",
-              mostrar_inventario(productos, precios, cantidades))
-1
+        compra = input(
+            "¿Qué número de producto desea ordenar? (o '0' para seguir a la caja): ").strip()
+
+        if compra == "0":
+            print("Pasando a la caja...")
+            break
+
+        indice = int(compra) - 1
+
+        if 0 <= indice < len(productos):
+            producto_elegido = productos[indice]
+            carrito_compras.append(producto_elegido)
+            print(f"¡Agregaste '{producto_elegido}' a tu carrito!")
+        else:
+            print("Número de producto no encontrado. Intente de nuevo.")
+
+    while True:
+        print("Bienvenido a la caja")
+        break
