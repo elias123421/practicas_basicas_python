@@ -80,6 +80,40 @@ elif eleccion == "cliente":
         else:
             print("Número de producto no encontrado. Intente de nuevo.")
 
+    total = 0
+
+    print("Bienvenido a la caja")
+    for producto in carrito_compras:
+        posicion = productos.index(producto)
+        precio_producto = precios[posicion]
+        total += precio_producto
+
+    print("Debes pagar un total de: ",  total, 'mxm$')
     while True:
-        print("Bienvenido a la caja")
-        break
+        pago = float(input("Con cuanto efectivo desea pagar? :  "))
+        if pago < total or pago < 0:
+            print("Pago, no valido !!, reintente el pago")
+        else:
+            cambio = pago - total
+            print("Su cambio es:  ", cambio, '$')
+            break
+    print("Agradescemos su visista a nuestra tienda!!! y esperamos contar de nuevo con su visita ")
+
+# 1. CONTROL DE STOCK (CANTIDADES):
+#    - Al comprar, el cliente no descuenta las piezas del inventario (`cantidades`).
+#    - Permitir agregar productos con cantidad 0 al carrito.
+#
+# 2. MANEJO DE EXCEPCIONES (VALIDACIÓN DE ENTRADAS):
+#    - Si el usuario ingresa letras en un `int()` o `float()` (ej. en la compra o precios),
+#      el programa se rompe con `ValueError`.
+#
+# 3. CARRITO VACÍO EN CAJA:
+#    - Si el cliente presiona '0' de inmediato, entra a la caja a pagar $0 en lugar
+#      de avisar que no lleva nada.
+#
+# 4. PRODUCTOS REPETIDOS EN EL CARRITO:
+#    - Si compran 2 mangos, se agregan como ["mango", "mango"]. Sería mejor tener
+#      un contador por producto dentro del carrito.
+#
+# 5. LIMITAR STOCK MÁXIMO EN COMPRA:
+#    - El cliente puede pedir 100 plátanos aunque solo existan 23 en existencia.
